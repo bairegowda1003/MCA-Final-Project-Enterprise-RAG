@@ -374,7 +374,8 @@ Python Crash Course.pdf successfully indexed
 - 562 Pages Processed
 - 2067 Chunks Generated
 
-c:\Users\BAIRE GOWDA\OneDrive\Pictures\Screenshots\Screenshot 2026-06-07 144214.png
+<img width="1920" height="1020" alt="Screenshot 2026-06-07 144214" src="https://github.com/user-attachments/assets/0a884adb-c279-444d-be2e-6414047f095a" />
+
 
 ---
 
