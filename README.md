@@ -398,7 +398,8 @@ Current Example:
 - Total Chunks: 2067
 - Status: Active
 
-c:\Users\BAIRE GOWDA\OneDrive\Pictures\Screenshots\Screenshot 2026-06-07 143827.png
+<img width="1920" height="1020" alt="image" src="https://github.com/user-attachments/assets/4028a55a-5237-41d6-8b0a-fcdaf34a09bb" />
+
 
 ---
 
@@ -419,7 +420,8 @@ Example Query:
 
 The system generated a structured report with source citations.
 
-c:\Users\BAIRE GOWDA\OneDrive\Pictures\Screenshots\Screenshot 2026-06-07 144122.png
+<img width="1920" height="1020" alt="Screenshot 2026-06-07 144122" src="https://github.com/user-attachments/assets/60fff09f-c6d0-4354-8c5b-514cd9cbcb34" />
+
 
 ---
 
