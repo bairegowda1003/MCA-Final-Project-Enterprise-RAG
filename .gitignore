@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual Environment
+venv/
+backend/venv/
+
+# Environment Variables
+.env
+
+# React
+node_modules/
+
+# Generated files
+backend/uploads/
+backend/reports/
+
+# OS files
+.DS_Store
+Thumbs.db
+backend/chroma_db/

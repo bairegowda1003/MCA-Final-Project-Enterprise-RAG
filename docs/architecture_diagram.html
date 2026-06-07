@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Enterprise RAG Architecture Diagram</title>
+<style>
+  body { background: #0b1426; font-family: 'Segoe UI', sans-serif; display: flex; flex-direction: column; align-items: center; padding: 40px 20px; }
+  h1 { color: #e2e8f0; font-size: 22px; margin-bottom: 6px; }
+  p  { color: #94a3b8; font-size: 13px; margin-bottom: 32px; }
+  svg text { font-family: 'Segoe UI', sans-serif; }
+</style>
+</head>
+<body>
+<h1>Enterprise RAG — Architecture Diagram</h1>
+<p>MCA Final Project | Prompt Engineering</p>
+<svg viewBox="0 0 900 760" width="900" height="760" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6"/>
+    </marker>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="760" fill="#0b1426" rx="16"/>
+
+  <!-- Title bar -->
+  <rect x="0" y="0" width="900" height="50" fill="#111e35" rx="16"/>
+  <rect x="0" y="34" width="900" height="16" fill="#111e35"/>
+  <text x="450" y="32" text-anchor="middle" fill="#e2e8f0" font-size="16" font-weight="700">Enterprise RAG Pipeline Architecture</text>
+
+  <!-- ── LEFT COLUMN: User + Frontend ── -->
+  <!-- User -->
+  <rect x="30" y="80" width="130" height="54" rx="10" fill="#162444" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="95" y="102" text-anchor="middle" fill="#60a5fa" font-size="18">👤</text>
+  <text x="95" y="122" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">User</text>
+
+  <!-- Arrow user → frontend -->
+  <line x1="160" y1="107" x2="200" y2="107" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- React Frontend -->
+  <rect x="200" y="70" width="160" height="74" rx="10" fill="#162444" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="280" y="95" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">React Frontend</text>
+  <text x="280" y="113" text-anchor="middle" fill="#94a3b8" font-size="10">Upload • Research</text>
+  <text x="280" y="127" text-anchor="middle" fill="#94a3b8" font-size="10">Manage • Security</text>
+
+  <!-- Arrow frontend → fastapi -->
+  <line x1="360" y1="107" x2="410" y2="107" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+  <text x="385" y="100" text-anchor="middle" fill="#94a3b8" font-size="9">HTTP REST</text>
+
+  <!-- FastAPI Backend box -->
+  <rect x="410" y="60" width="180" height="94" rx="10" fill="#1e3a6e" stroke="#60a5fa" stroke-width="2" filter="url(#glow)"/>
+  <text x="500" y="85" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">FastAPI Backend</text>
+  <text x="500" y="103" text-anchor="middle" fill="#94a3b8" font-size="10">POST /upload</text>
+  <text x="500" y="117" text-anchor="middle" fill="#94a3b8" font-size="10">POST /query</text>
+  <text x="500" y="131" text-anchor="middle" fill="#94a3b8" font-size="10">DELETE /document • PUT /document</text>
+
+  <!-- ── PIPELINE FLOW (center column) ── -->
+  <!-- PDF Processor -->
+  <line x1="500" y1="154" x2="500" y2="186" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="390" y="186" width="220" height="54" rx="10" fill="#162444" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="500" y="208" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">PDF Processor</text>
+  <text x="500" y="226" text-anchor="middle" fill="#94a3b8" font-size="10">Extract Text → Chunk (100 words)</text>
+
+  <!-- Chunking -->
+  <line x1="500" y1="240" x2="500" y2="272" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+  <rect x="390" y="272" width="220" height="54" rx="10" fill="#162444" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="500" y="294" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">Sentence Transformers</text>
+  <text x="500" y="312" text-anchor="middle" fill="#94a3b8" font-size="10">all-MiniLM-L6-v2 Embeddings</text>
+
+  <!-- Arrow to ChromaDB -->
+  <line x1="500" y1="326" x2="500" y2="358" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- ChromaDB -->
+  <rect x="370" y="358" width="260" height="60" rx="10" fill="#0f2a4a" stroke="#f59e0b" stroke-width="2"/>
+  <text x="500" y="381" text-anchor="middle" fill="#f59e0b" font-size="13" font-weight="700">ChromaDB Vector Store</text>
+  <text x="500" y="399" text-anchor="middle" fill="#94a3b8" font-size="10">Persistent • 5000+ pages • HNSW Index</text>
+
+  <!-- Arrow to retrieval -->
+  <line x1="500" y1="418" x2="500" y2="450" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- Vector Search -->
+  <rect x="390" y="450" width="220" height="54" rx="10" fill="#162444" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="500" y="472" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">Semantic Search</text>
+  <text x="500" y="490" text-anchor="middle" fill="#94a3b8" font-size="10">Cosine Similarity → Top 20 Chunks</text>
+
+  <!-- Arrow to reranker -->
+  <line x1="500" y1="504" x2="500" y2="536" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- FlashRank -->
+  <rect x="370" y="536" width="260" height="54" rx="10" fill="#162444" stroke="#10b981" stroke-width="2"/>
+  <text x="500" y="558" text-anchor="middle" fill="#10b981" font-size="12" font-weight="700">FlashRank Reranker</text>
+  <text x="500" y="576" text-anchor="middle" fill="#94a3b8" font-size="10">ms-marco-MiniLM → Top 5 Chunks</text>
+
+  <!-- Arrow to LLM -->
+  <line x1="500" y1="590" x2="500" y2="622" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- OpenRouter / GPT -->
+  <rect x="360" y="622" width="280" height="60" rx="10" fill="#1e3a6e" stroke="#60a5fa" stroke-width="2" filter="url(#glow)"/>
+  <text x="500" y="645" text-anchor="middle" fill="#60a5fa" font-size="13" font-weight="700">OpenRouter — GPT-4o-mini</text>
+  <text x="500" y="663" text-anchor="middle" fill="#94a3b8" font-size="10">CoT 5-Step Reasoning • System Prompt</text>
+
+  <!-- Arrow to output -->
+  <line x1="500" y1="682" x2="500" y2="714" stroke="#3b82f6" stroke-width="1.8" marker-end="url(#arr)"/>
+
+  <!-- PDF Report -->
+  <rect x="390" y="714" width="220" height="36" rx="10" fill="#162444" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="500" y="737" text-anchor="middle" fill="#e2e8f0" font-size="12" font-weight="600">PDF Report (ReportLab)</text>
+
+  <!-- ── RIGHT COLUMN: Guardrails ── -->
+  <rect x="700" y="200" width="170" height="340" rx="12" fill="#1a0a00" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="785" y="224" text-anchor="middle" fill="#ef4444" font-size="12" font-weight="700">🛡 Guardrails</text>
+
+  <rect x="712" y="234" width="146" height="34" rx="6" fill="#2a0f0f"/>
+  <text x="785" y="249" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">Input Validation</text>
+  <text x="785" y="263" text-anchor="middle" fill="#94a3b8" font-size="9">Injection • Jailbreak • Scope</text>
+
+  <rect x="712" y="278" width="146" height="34" rx="6" fill="#2a0f0f"/>
+  <text x="785" y="293" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">Threat Detection</text>
+  <text x="785" y="307" text-anchor="middle" fill="#94a3b8" font-size="9">Pattern Matching • Regex</text>
+
+  <rect x="712" y="322" width="146" height="34" rx="6" fill="#2a0f0f"/>
+  <text x="785" y="337" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">Output Validation</text>
+  <text x="785" y="351" text-anchor="middle" fill="#94a3b8" font-size="9">Grounding Check • Overlap</text>
+
+  <rect x="712" y="366" width="146" height="34" rx="6" fill="#2a0f0f"/>
+  <text x="785" y="381" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">Hallucination Check</text>
+  <text x="785" y="395" text-anchor="middle" fill="#94a3b8" font-size="9">Semantic Grounding Score</text>
+
+  <rect x="712" y="410" width="146" height="34" rx="6" fill="#2a0f0f"/>
+  <text x="785" y="425" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">API Fallback</text>
+  <text x="785" y="439" text-anchor="middle" fill="#94a3b8" font-size="9">Show Raw Chunks on Fail</text>
+
+  <rect x="712" y="454" width="146" height="34" rx="6" fill="#2a0f0f"/>
+  <text x="785" y="469" text-anchor="middle" fill="#fca5a5" font-size="10" font-weight="600">Token Optimization</text>
+  <text x="785" y="483" text-anchor="middle" fill="#94a3b8" font-size="9">Top-K + Reranking Filter</text>
+
+  <!-- Guard arrow to pipeline -->
+  <line x1="700" y1="450" x2="640" y2="560" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+
+  <!-- ── LEGEND ── -->
+  <rect x="30" y="680" width="320" height="70" rx="10" fill="#111e35" stroke="#1e3a6e" stroke-width="1"/>
+  <text x="190" y="700" text-anchor="middle" fill="#94a3b8" font-size="11" font-weight="700">Legend</text>
+  <rect x="44" y="710" width="12" height="12" rx="2" fill="#1e3a6e" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="62" y="721" fill="#e2e8f0" font-size="10">Core Pipeline</text>
+  <rect x="44" y="728" width="12" height="12" rx="2" fill="#0f2a4a" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="62" y="739" fill="#e2e8f0" font-size="10">Storage Layer</text>
+  <rect x="140" y="710" width="12" height="12" rx="2" fill="#162444" stroke="#10b981" stroke-width="1.5"/>
+  <text x="158" y="721" fill="#e2e8f0" font-size="10">Retrieval / Reranking</text>
+  <rect x="140" y="728" width="12" height="12" rx="2" fill="#1a0a00" stroke="#ef4444" stroke-width="1.5"/>
+  <text x="158" y="739" fill="#e2e8f0" font-size="10">Security Layer</text>
+</svg>
+</body>
+</html>
