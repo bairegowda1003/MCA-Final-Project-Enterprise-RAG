@@ -456,6 +456,16 @@ Features:
 
 ---
 
+# Additional Project Documents
+
+The following supporting documents are included in the `docs` folder:
+
+- `docs/Project_Report.pdf` – Complete project report
+- `docs/Architecture_Diagram.png` – System architecture diagram
+- `docs/Demo_Video.mp4` – Project demonstration video
+
+---
+
 # Future Enhancements
 
 * Multi-user authentication
